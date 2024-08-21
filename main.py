@@ -16,6 +16,14 @@ initial_position = root.geometry().split("+")
 initial_x = int(initial_position[1])
 initial_y = int(initial_position[2])
 
+def vibrate_window_thread():
+    render_loop()
+
+def init_thread():
+    t1 = threading.Thread(target = vibrate_window_thread)
+    t1.start()
+
+
 def render_loop(VALUE_TO_INC = 3, MIN = initial_x - 9, MAX = initial_x + 9):
     i = 1
     while True:
@@ -38,11 +46,7 @@ def render_loop(VALUE_TO_INC = 3, MIN = initial_x - 9, MAX = initial_x + 9):
                 VALUE_TO_INC = VALUE_TO_INC * -1
                 i = 1
 
-def vibrate_window_thread():
-    render_loop()
 
-t1 = threading.Thread(target = vibrate_window_thread)
-
-t1.start()
-
+init_thread()
 root.mainloop()
+
